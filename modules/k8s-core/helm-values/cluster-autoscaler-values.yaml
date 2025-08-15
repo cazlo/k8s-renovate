@@ -1,0 +1,29 @@
+# Cluster Autoscaler Helm values
+autoDiscovery:
+  enabled: true
+  clusterName: ${cluster_name}
+
+awsRegion: ${aws_region}
+
+rbac:
+  create: true
+  serviceAccount:
+    create: true
+    annotations:
+      eks.amazonaws.com/role-arn: ${service_account_role_arn}
+
+extraArgs:
+  skip-nodes-with-local-storage: false
+  expander: least-waste
+  balance-similar-node-groups: true
+  scale-down-enabled: true
+  scale-down-delay-after-add: 5m
+  scale-down-unneeded-time: 5m
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

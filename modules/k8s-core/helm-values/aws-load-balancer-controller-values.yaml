@@ -1,0 +1,22 @@
+# AWS Load Balancer Controller Helm values
+replicaCount: 2
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+serviceAccount:
+  create: true
+  annotations: {}
+
+ingressClass: alb
+defaultTags:
+  managed-by: aws-load-balancer-controller
