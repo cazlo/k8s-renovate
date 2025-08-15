@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:base",
+    "group:allNonMajor"
   ],
   "labels": ["dependencies"],
   "terraform": {
@@ -41,5 +42,22 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
     }
+  ],
+  "platform": "github",
+  "repositories": ["cazlo/k8s-renovate"],
+  "semanticCommits": "enabled",
+  enabledManagers: [
+    // https://docs.renovatebot.com/modules/manager/#supported-managers
+    "github-actions",
+//    "pep621", // for uv
+    "poetry",
+    "dockerfile",
+    "custom.regex", // expected future
+    "terraform",
+    "terragrunt",
+    "helmv3",
+    "helmfile",
+    "helm-requirements",
+    "kubernetes",
   ]
 }
