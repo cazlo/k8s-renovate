@@ -12,24 +12,115 @@
     "fileMatch": ["helm-values/.+\\.ya?ml$"]
   },
   "regexManagers": [
-//    {
-//      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
-//      "matchStrings": [
-//        "variable \"(?<depName>[a-z_]+_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
-//      ],
-//      "datasourceTemplate": "helm",
-//      "depNameTemplate": "{{#if (contains depName \"aws_efs_csi_driver\")}}aws-efs-csi-driver{{else}}{{#if (contains depName \"aws_load_balancer_controller\")}}aws-load-balancer-controller{{else}}{{#if (contains depName \"metrics_server\")}}metrics-server{{else}}{{#if (contains depName \"cluster_autoscaler\")}}cluster-autoscaler{{else}}{{#if (contains depName \"secrets_store_csi_driver_provider_aws\")}}secrets-store-csi-driver-provider-aws{{else}}{{#if (contains depName \"secrets_store_csi_driver\")}}secrets-store-csi-driver{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}",
-//      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/,https://kubernetes-sigs.github.io/secrets-store-csi-driver/,https://aws.github.io/secrets-store-csi-driver-provider-aws/,https://aws.github.io/eks-charts/,https://kubernetes.github.io/autoscaler/,https://kubernetes-sigs.github.io/metrics-server/"
-//    },
-//    {
-//      "fileMatch": ["^environments/.+/main\\.tf$"],
-//      "matchStrings": [
-//        "\\s+(?<depName>[a-z_]+_chart_version)\\s*=\\s*\"(?<currentValue>[^\"]+)\""
-//      ],
-//      "datasourceTemplate": "helm",
-//      "depNameTemplate": "{{#if (contains depName \"aws_efs_csi_driver\")}}aws-efs-csi-driver{{else}}{{#if (contains depName \"aws_load_balancer_controller\")}}aws-load-balancer-controller{{else}}{{#if (contains depName \"metrics_server\")}}metrics-server{{else}}{{#if (contains depName \"cluster_autoscaler\")}}cluster-autoscaler{{else}}{{#if (contains depName \"secrets_store_csi_driver_provider_aws\")}}secrets-store-csi-driver-provider-aws{{else}}{{#if (contains depName \"secrets_store_csi_driver\")}}secrets-store-csi-driver{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}",
-//      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/,https://kubernetes-sigs.github.io/secrets-store-csi-driver/,https://aws.github.io/secrets-store-csi-driver-provider-aws/,https://aws.github.io/eks-charts/,https://kubernetes.github.io/autoscaler/,https://kubernetes-sigs.github.io/metrics-server/"
-//    }
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>aws_efs_csi_driver_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "aws-efs-csi-driver",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+aws_efs_csi_driver_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "aws-efs-csi-driver",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/"
+    },
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>secrets_store_csi_driver_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "secrets-store-csi-driver",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+secrets_store_csi_driver_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "secrets-store-csi-driver",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+    },
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>secrets_store_csi_driver_provider_aws_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "secrets-store-csi-driver-provider-aws",
+      "registryUrlTemplate": "https://aws.github.io/secrets-store-csi-driver-provider-aws/"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+secrets_store_csi_driver_provider_aws_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "secrets-store-csi-driver-provider-aws",
+      "registryUrlTemplate": "https://aws.github.io/secrets-store-csi-driver-provider-aws/"
+    },
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>aws_load_balancer_controller_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "aws-load-balancer-controller",
+      "registryUrlTemplate": "https://aws.github.io/eks-charts/"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+aws_load_balancer_controller_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "aws-load-balancer-controller",
+      "registryUrlTemplate": "https://aws.github.io/eks-charts/"
+    },
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>metrics_server_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "metrics-server",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/metrics-server/"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+metrics_server_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "metrics-server",
+      "registryUrlTemplate": "https://kubernetes-sigs.github.io/metrics-server/"
+    },
+    {
+      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+      "matchStrings": [
+        "variable \"(?<depName>cluster_autoscaler_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "cluster-autoscaler",
+      "registryUrlTemplate": "https://kubernetes.github.io/autoscaler/"
+    },
+    {
+      "fileMatch": ["^environments/.+/main\\.tf$"],
+      "matchStrings": [
+        "\\s+cluster_autoscaler_chart_version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "helm",
+      "depNameTemplate": "cluster-autoscaler",
+      "registryUrlTemplate": "https://kubernetes.github.io/autoscaler/"
+    }
+
   ],
   "packageRules": [
     {
