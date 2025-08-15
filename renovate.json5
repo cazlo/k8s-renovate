@@ -126,27 +126,27 @@
     {
       "matchUpdateTypes": ["major"],
       "automerge": false,
-      "labels": ["major"]
+      "addLabels": ["major"]
     },
     {
       "matchUpdateTypes": ["minor"],
       "automerge": false,
-      "labels": ["minor"]
+      "addLabels": ["minor"]
     },
     {
       "matchUpdateTypes": ["patch"],
       "automerge": false,
-      "labels": ["patch"]
+      "addLabels": ["patch"]
     },
     {
       "matchDatasources": ["terraform"],
       "automerge": false,
-      "labels": ["terraform"]
+      "addLabels": ["terraform"]
     },
     {
       "matchDatasources": ["helm"],
       "automerge": false,
-      "labels": ["helm"]
+      "addLabels": ["helm"]
     },
   ],
   "platform": "github",
