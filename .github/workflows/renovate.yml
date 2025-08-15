@@ -1,0 +1,37 @@
+name: Renovate
+on:
+  schedule:
+    - cron: '42 * * * *' # once per hour
+  workflow_dispatch: # Allow manual triggering
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # token setup details at https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          private-key: ${{ secrets.RENOVATE_PRIVATE_KEY }}
+          app-id: ${{ secrets.RENOVATE_APP_ID }}
+          owner: ${{ github.repository_owner }}
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v43.0.6
+        env:
+          # use commit signing via GitHub API
+          RENOVATE_PLATFORM_COMMIT: 'true'
+        with:
+          token: '${{ steps.get_token.outputs.token }}'
+          configurationFile: renovate.json5

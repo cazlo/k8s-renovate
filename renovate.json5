@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "labels": ["dependencies"],
+  "terraform": {
+    "ignorePaths": ["**/examples/**"]
+  },
+  "helmv3": {
+    "fileMatch": ["helm-values/.+\\.ya?ml$"]
+  },
+  "regexManagers": [
+//    {
+//      "fileMatch": ["^modules/k8s-core/variables\\.tf$"],
+//      "matchStrings": [
+//        "variable \"(?<depName>[a-z_]+_chart_version)\"\\s*\\{[^}]*default\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*\\}"
+//      ],
+//      "datasourceTemplate": "helm",
+//      "depNameTemplate": "{{#if (contains depName \"aws_efs_csi_driver\")}}aws-efs-csi-driver{{else}}{{#if (contains depName \"aws_load_balancer_controller\")}}aws-load-balancer-controller{{else}}{{#if (contains depName \"metrics_server\")}}metrics-server{{else}}{{#if (contains depName \"cluster_autoscaler\")}}cluster-autoscaler{{else}}{{#if (contains depName \"secrets_store_csi_driver_provider_aws\")}}secrets-store-csi-driver-provider-aws{{else}}{{#if (contains depName \"secrets_store_csi_driver\")}}secrets-store-csi-driver{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}",
+//      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/,https://kubernetes-sigs.github.io/secrets-store-csi-driver/,https://aws.github.io/secrets-store-csi-driver-provider-aws/,https://aws.github.io/eks-charts/,https://kubernetes.github.io/autoscaler/,https://kubernetes-sigs.github.io/metrics-server/"
+//    },
+//    {
+//      "fileMatch": ["^environments/.+/main\\.tf$"],
+//      "matchStrings": [
+//        "\\s+(?<depName>[a-z_]+_chart_version)\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+//      ],
+//      "datasourceTemplate": "helm",
+//      "depNameTemplate": "{{#if (contains depName \"aws_efs_csi_driver\")}}aws-efs-csi-driver{{else}}{{#if (contains depName \"aws_load_balancer_controller\")}}aws-load-balancer-controller{{else}}{{#if (contains depName \"metrics_server\")}}metrics-server{{else}}{{#if (contains depName \"cluster_autoscaler\")}}cluster-autoscaler{{else}}{{#if (contains depName \"secrets_store_csi_driver_provider_aws\")}}secrets-store-csi-driver-provider-aws{{else}}{{#if (contains depName \"secrets_store_csi_driver\")}}secrets-store-csi-driver{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}",
+//      "registryUrlTemplate": "https://kubernetes-sigs.github.io/aws-efs-csi-driver/,https://kubernetes-sigs.github.io/secrets-store-csi-driver/,https://aws.github.io/secrets-store-csi-driver-provider-aws/,https://aws.github.io/eks-charts/,https://kubernetes.github.io/autoscaler/,https://kubernetes-sigs.github.io/metrics-server/"
+//    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["terraform"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": false
+    },
+    {
+      "matchDatasources": ["helm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": false
+    }
+  ]
+}
