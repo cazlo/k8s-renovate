@@ -145,7 +145,7 @@ module "k8s_core" {
   # Specify chart versions for add-ons
   aws_efs_csi_driver_chart_version                  = "2.4.0"
   secrets_store_csi_driver_chart_version            = "1.3.3"
-  secrets_store_csi_driver_provider_aws_chart_version = "0.3.3"
+  secrets_store_csi_driver_provider_aws_chart_version = "2.0.0"
   aws_load_balancer_controller_chart_version        = "1.4.8"
   metrics_server_chart_version                      = "3.10.0"
   cluster_autoscaler_chart_version                  = "9.25.0"

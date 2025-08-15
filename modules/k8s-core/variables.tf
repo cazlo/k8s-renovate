@@ -34,7 +34,7 @@ variable "secrets_store_csi_driver_chart_version" {
 variable "secrets_store_csi_driver_provider_aws_chart_version" {
   description = "Chart version for Secrets Store CSI Driver AWS Provider"
   type        = string
-  default     = "0.3.3"
+  default     = "2.0.0"
 }
 
 variable "aws_load_balancer_controller_chart_version" {
