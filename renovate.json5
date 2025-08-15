@@ -209,6 +209,15 @@
         'helm',
       ],
     },
+    {
+      matchDatasources: [
+        'github-actions',
+      ],
+      automerge: false,
+      addLabels: [
+        'github-actions',
+      ],
+    }
   ],
   platform: 'github',
   repositories: [
