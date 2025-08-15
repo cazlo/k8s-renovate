@@ -22,7 +22,7 @@ jobs:
       # token setup details at https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app
       - name: Get token
         id: get_token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         with:
           private-key: ${{ secrets.RENOVATE_PRIVATE_KEY }}
           app-id: ${{ secrets.RENOVATE_APP_ID }}
