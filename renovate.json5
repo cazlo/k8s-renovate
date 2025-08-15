@@ -193,7 +193,7 @@
     },
     {
       matchDatasources: [
-        'terraform',
+        'terraform-provider', 'terraform-module',
       ],
       automerge: false,
       addLabels: [
@@ -210,8 +210,8 @@
       ],
     },
     {
-      matchDatasources: [
-        'github-actions',
+      matchDepTypes: [
+        'action', 'github-runner'
       ],
       automerge: false,
       addLabels: [
