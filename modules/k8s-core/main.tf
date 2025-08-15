@@ -35,6 +35,7 @@ module "eks_blueprints_addons" {
   aws_efs_csi_driver = {
     namespace          = "kube-system"
     create_namespace   = false
+    chart_version      = var.aws_efs_csi_driver_chart_version
     values             = [file("${path.module}/helm-values/aws-efs-csi-driver-values.yaml")]
     set                = []
     set_sensitive      = []
@@ -46,10 +47,12 @@ module "eks_blueprints_addons" {
   secrets_store_csi_driver = {
     namespace        = "kube-system"
     create_namespace = false
+    chart_version    = var.secrets_store_csi_driver_chart_version
   }
   secrets_store_csi_driver_provider_aws = {
     namespace        = "kube-system"
     create_namespace = false
+    chart_version    = var.secrets_store_csi_driver_provider_aws_chart_version
   }
 
   # AWS Load Balancer Controller
@@ -57,7 +60,7 @@ module "eks_blueprints_addons" {
   aws_load_balancer_controller = {
     namespace        = "kube-system"
     create_namespace = false
-    chart_version    = "1.4.8"  # Specify the chart version
+    chart_version    = var.aws_load_balancer_controller_chart_version
     values           = [file("${path.module}/helm-values/aws-load-balancer-controller-values.yaml")]
   }
 
@@ -66,6 +69,7 @@ module "eks_blueprints_addons" {
   metrics_server = {
     namespace        = "kube-system"
     create_namespace = false
+    chart_version    = var.metrics_server_chart_version
     values           = [file("${path.module}/helm-values/metrics-server-values.yaml")]
   }
 
@@ -74,7 +78,7 @@ module "eks_blueprints_addons" {
   cluster_autoscaler = {
     namespace        = "kube-system"
     create_namespace = false
-    chart_version    = "9.25.0"  # Specify the chart version
+    chart_version    = var.cluster_autoscaler_chart_version
     values           = [file("${path.module}/helm-values/cluster-autoscaler-values.yaml")]
   }
 
