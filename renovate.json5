@@ -124,15 +124,30 @@
   ],
   "packageRules": [
     {
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["major"]
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "automerge": false,
+      "labels": ["minor"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": false,
+      "labels": ["patch"]
+    },
+    {
       "matchDatasources": ["terraform"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": false
+      "automerge": false,
+      "labels": ["terraform"]
     },
     {
       "matchDatasources": ["helm"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": false
-    }
+      "automerge": false,
+      "labels": ["helm"]
+    },
   ],
   "platform": "github",
   "repositories": ["cazlo/k8s-renovate"],
