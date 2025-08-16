@@ -3,6 +3,7 @@
   extends: [
     'config:recommended',
     'group:allNonMajor',
+    'mergeConfidence:all-badges',
   ],
   labels: [
     'dependencies',
