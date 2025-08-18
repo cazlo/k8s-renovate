@@ -22,7 +22,7 @@ variable "oidc_provider_arn" {
 variable "aws_efs_csi_driver_chart_version" {
   description = "Chart version for AWS EFS CSI Driver"
   type        = string
-  default     = "2.4.0"
+  default     = "3.2.2"
 }
 
 variable "secrets_store_csi_driver_chart_version" {
