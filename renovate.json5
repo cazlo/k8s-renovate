@@ -1,9 +1,10 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:recommended',
+    'config:best-practices',
     'group:allNonMajor',
     'mergeConfidence:all-badges',
+    'security:only-security-updates',
   ],
   labels: [
     'dependencies',
