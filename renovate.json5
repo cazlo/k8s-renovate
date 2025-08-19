@@ -3,213 +3,218 @@
   extends: [
     'config:best-practices',
     'group:allNonMajor',
-    'mergeConfidence:all-badges',
-    'security:only-security-updates',
+    'mergeConfidence:all-badges'
+//    'security:only-security-updates',
   ],
   labels: [
-    'dependencies',
+    'dependencies'
   ],
   terraform: {
     ignorePaths: [
-      '**/examples/**',
-    ],
+      '**/examples/**'
+    ]
   },
   helmv3: {
     managerFilePatterns: [
-      '/helm-values/.+\\.ya?ml$/',
-    ],
+      '/helm-values/.+\\.ya?ml$/'
+    ]
+  },
+  vulnerabilityAlerts: {
+    labels: ["security"],
+    automerge: false,
+    enabled: true
   },
   customManagers: [
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>aws_efs_csi_driver_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>aws_efs_csi_driver_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'aws-efs-csi-driver',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/aws-efs-csi-driver/',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/aws-efs-csi-driver/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+aws_efs_csi_driver_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+aws_efs_csi_driver_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'aws-efs-csi-driver',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/aws-efs-csi-driver/',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/aws-efs-csi-driver/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>secrets_store_csi_driver_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>secrets_store_csi_driver_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'secrets-store-csi-driver',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+secrets_store_csi_driver_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+secrets_store_csi_driver_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'secrets-store-csi-driver',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>secrets_store_csi_driver_provider_aws_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>secrets_store_csi_driver_provider_aws_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'secrets-store-csi-driver-provider-aws',
-      registryUrlTemplate: 'https://aws.github.io/secrets-store-csi-driver-provider-aws/',
+      registryUrlTemplate: 'https://aws.github.io/secrets-store-csi-driver-provider-aws/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+secrets_store_csi_driver_provider_aws_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+secrets_store_csi_driver_provider_aws_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'secrets-store-csi-driver-provider-aws',
-      registryUrlTemplate: 'https://aws.github.io/secrets-store-csi-driver-provider-aws/',
+      registryUrlTemplate: 'https://aws.github.io/secrets-store-csi-driver-provider-aws/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>aws_load_balancer_controller_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>aws_load_balancer_controller_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'aws-load-balancer-controller',
-      registryUrlTemplate: 'https://aws.github.io/eks-charts/',
+      registryUrlTemplate: 'https://aws.github.io/eks-charts/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+aws_load_balancer_controller_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+aws_load_balancer_controller_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'aws-load-balancer-controller',
-      registryUrlTemplate: 'https://aws.github.io/eks-charts/',
+      registryUrlTemplate: 'https://aws.github.io/eks-charts/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>metrics_server_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>metrics_server_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'metrics-server',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/metrics-server/',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/metrics-server/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+metrics_server_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+metrics_server_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'metrics-server',
-      registryUrlTemplate: 'https://kubernetes-sigs.github.io/metrics-server/',
+      registryUrlTemplate: 'https://kubernetes-sigs.github.io/metrics-server/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^modules/k8s-core/variables\\.tf$/',
+        '/^modules/k8s-core/variables\\.tf$/'
       ],
       matchStrings: [
-        'variable "(?<depName>cluster_autoscaler_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}',
+        'variable "(?<depName>cluster_autoscaler_chart_version)"\\s*\\{[^}]*default\\s*=\\s*"(?<currentValue>[^"]+)"[^}]*\\}'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'cluster-autoscaler',
-      registryUrlTemplate: 'https://kubernetes.github.io/autoscaler/',
+      registryUrlTemplate: 'https://kubernetes.github.io/autoscaler/'
     },
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^environments/.+/main\\.tf$/',
+        '/^environments/.+/main\\.tf$/'
       ],
       matchStrings: [
-        '\\s+cluster_autoscaler_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"',
+        '\\s+cluster_autoscaler_chart_version\\s*=\\s*"(?<currentValue>[^"]+)"'
       ],
       datasourceTemplate: 'helm',
       depNameTemplate: 'cluster-autoscaler',
-      registryUrlTemplate: 'https://kubernetes.github.io/autoscaler/',
-    },
+      registryUrlTemplate: 'https://kubernetes.github.io/autoscaler/'
+    }
   ],
   packageRules: [
     {
       matchUpdateTypes: [
-        'major',
+        'major'
       ],
       automerge: false,
       addLabels: [
-        'major',
-      ],
+        'major'
+      ]
     },
     {
       matchUpdateTypes: [
-        'minor',
+        'minor'
       ],
       automerge: false,
       addLabels: [
-        'minor',
-      ],
+        'minor'
+      ]
     },
     {
       matchUpdateTypes: [
-        'patch',
+        'patch'
       ],
       automerge: false,
       addLabels: [
-        'patch',
-      ],
+        'patch'
+      ]
     },
     {
       matchDatasources: [
-        'terraform-provider', 'terraform-module',
+        'terraform-provider', 'terraform-module'
       ],
       automerge: false,
       addLabels: [
-        'terraform',
-      ],
+        'terraform'
+      ]
     },
     {
       matchDatasources: [
-        'helm',
+        'helm'
       ],
       automerge: false,
       addLabels: [
-        'helm',
-      ],
+        'helm'
+      ]
     },
     {
       matchDepTypes: [
@@ -217,13 +222,13 @@
       ],
       automerge: false,
       addLabels: [
-        'github-actions',
-      ],
+        'github-actions'
+      ]
     }
   ],
   platform: 'github',
   repositories: [
-    'cazlo/k8s-renovate',
+    'cazlo/k8s-renovate'
   ],
   semanticCommits: 'enabled',
   enabledManagers: [
@@ -236,6 +241,6 @@
     'helmv3',
     'helmfile',
     'helm-requirements',
-    'kubernetes',
-  ],
+    'kubernetes'
+  ]
 }
