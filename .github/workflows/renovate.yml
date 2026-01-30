@@ -28,7 +28,7 @@ jobs:
           app-id: ${{ secrets.RENOVATE_APP_ID }}
           owner: ${{ github.repository_owner }}
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v43.0.6
+        uses: renovatebot/github-action@98c8f1b0835e163b9fdfc7c86dff40dadc7162ee # v45.0.3
         env:
           # use commit signing via GitHub API
           RENOVATE_PLATFORM_COMMIT: 'true'
