@@ -40,7 +40,7 @@ variable "secrets_store_csi_driver_provider_aws_chart_version" {
 variable "aws_load_balancer_controller_chart_version" {
   description = "Chart version for AWS Load Balancer Controller"
   type        = string
-  default     = "1.4.8"
+  default     = "3.5.0"
 }
 
 variable "metrics_server_chart_version" {
